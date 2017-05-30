@@ -37,8 +37,12 @@ export default function reducer(state=initialState, action) {
       });
   }
   else if(action.type === SELECT_ANSWER){
+    console.log(action.value);
     let scoreCopy = state.scoreTracker.slice(0);
+    console.log(scoreCopy);
+
     scoreCopy[action.index] = action.value;
+    // console.log(scoreCopy);
     return Object.assign({}, state, {
       scoreTracker: scoreCopy
     }); 

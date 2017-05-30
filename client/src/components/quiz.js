@@ -12,7 +12,7 @@ export class Quiz extends React.Component {
 
     handleAnswer(event) {
         const index = event.target.key;
-        const value = event.target.value;
+        const value = event.target.questionId;
         this.props.dispatch(selectAnswer(index, value));
     } 
 
@@ -20,10 +20,11 @@ export class Quiz extends React.Component {
         const questions = this.props.questions.map((question, index) => {
             let choicesArray = [...question.incorrect_answers, question.correct_answer];
              choicesArray = _.shuffle(choicesArray);
-             const choices = choicesArray.map((choice, index) => {
+             const choices = choicesArray.map((choice, index2) => {
                  
                  return <button className='choice-button' onClick={this.handleAnswer}
-                                value={choice} key={index}>{choice}</button>
+                                questionId={index}
+                                value={choice} key={index2}>{choice}</button>
              });
        return <li key={index}>
                 {question.question}<br />
