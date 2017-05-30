@@ -1,22 +1,3 @@
-import {Categories} from '../config.js'
-
-export const fetchQuestions = (category,difficulty) => dispatch => {
-  console.log('called fetch questions');
-  dispatch(fetchQuestionsRequest());
-  console.log(category)
-  fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${category}&difficulty=${difficulty}`).then(res => {
-    if(!res.ok) {
-        return Promise.reject(res.statusText);
-      }
-    return res.json();
-    }).then(question => {
-      console.log(question)
-      dispatch(fetchQuestionsSuccess(question));
-    }).catch(error => {
-      dispatch(fetchQuestionsError(error));
-    });
-};
-
 //sync action to confirm the receipt of the API request
 export const FETCH_QUESTIONS_REQUEST = 'FETCH_QUESTIONS_REQUEST';
 export const fetchQuestionsRequest = () => ({
@@ -35,3 +16,20 @@ export const fetchQuestionsError = error => ({
   type: FETCH_QUESTIONS_ERROR,
   error
 });
+
+export const fetchQuestions = (category,difficulty) => dispatch => {
+  console.log('called fetch questions');
+  dispatch(fetchQuestionsRequest());
+  console.log(category);
+  fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${category}&difficulty=${difficulty}`).then(res => {
+    if(!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  }).then(data => {
+    console.log(data.results);
+    dispatch(fetchQuestionsSuccess(data.results));
+  }).catch(error => {
+    dispatch(fetchQuestionsError(error));
+  });
+};
