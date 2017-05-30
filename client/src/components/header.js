@@ -28,6 +28,7 @@ export class Header extends React.Component {
                 <ul id ='topic-list'>
                     {topics}
                 </ul>
+                {/*<button onClick={}>Submit</button>*/}
             </section>
         )
     }

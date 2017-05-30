@@ -17,6 +17,13 @@ export const fetchQuestionsError = error => ({
   error
 });
 
+export const SELECT_ANSWER = 'SELECT_ANSWER';
+export const selectAnswer = (index, value) => ({
+  type: SELECT_ANSWER,
+  index,
+  value
+});
+
 export const fetchQuestions = (category,difficulty) => dispatch => {
   console.log('called fetch questions');
   dispatch(fetchQuestionsRequest());

@@ -1,11 +1,16 @@
-import {FETCH_QUESTIONS_REQUEST, FETCH_QUESTIONS_SUCCESS, FETCH_QUESTIONS_ERROR} from '../actions/action';
+import {FETCH_QUESTIONS_REQUEST, FETCH_QUESTIONS_SUCCESS, 
+        FETCH_QUESTIONS_ERROR, SELECT_ANSWER} from '../actions/action';
+import {_} from 'underscore';
 
 const initialState = {
   questions: [],
   userToken: null,
-  score: {},
+  scoreTotals: {},
   loading: false,
-  error: null
+  error: null,
+  scoreTracker: [],
+  scoreKeys: []
+  
 
 };
 
@@ -23,11 +28,20 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === FETCH_QUESTIONS_SUCCESS){
+    const answerArray = _.pluck(action.questions, 'correct_answer'); 
+    return Object.assign({}, state, { 
+        questions: action.questions,
+        loading: false,
+        error: null,
+        scoreKeys: answerArray 
+      });
+  }
+  else if(action.type === SELECT_ANSWER){
+    let scoreCopy = state.scoreTracker.slice(0);
+    scoreCopy[action.index] = action.value;
     return Object.assign({}, state, {
-      questions: action.questions,
-      loading: false,
-      error: null
-    });
+      scoreTracker: scoreCopy
+    }); 
   }
 
   return state;
