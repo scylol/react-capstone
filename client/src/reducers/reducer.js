@@ -2,10 +2,8 @@ import {FETCH_QUESTIONS_REQUEST, FETCH_QUESTIONS_SUCCESS, FETCH_QUESTIONS_ERROR}
 
 const initialState = {
     questions: [],
-	activeCategory: null,
 	userToken: null,
-	score: { },
-    difficulty: 0,
+	score: {},
     loading: false,
     error: null
 
@@ -16,7 +14,7 @@ export default function reducer(state=initialState, action) {
         return Object.assign({}, state, {
             loading: true,
             error: null
-        }); 
+        });
     }
     else if(action.type === FETCH_QUESTIONS_ERROR){
         return Object.assign({}, state, {
@@ -27,6 +25,8 @@ export default function reducer(state=initialState, action) {
     else if(action.type === FETCH_QUESTIONS_SUCCESS){
         return Object.assign({}, state, {
             questions: action.questions,
+            activeCategory: action.questions[0].category,
+            loading: false,
             error: null
         });
     }

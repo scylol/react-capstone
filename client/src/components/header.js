@@ -1,23 +1,26 @@
 import React from 'react';
+import Categories from '../config'
+import {fetchQuestions} from '../actions/action'
+import {connect} from 'react-redux'
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
     constructor (props) {
-        super(props)
-        this.state = {
-            topics: [
-                'Hello World',
-                'ANimals are Fun',
-                'My name is Donald'
-            ]
-        }
+        super(props);
+        this.getQuestions = this.getQuestions.bind(this)
     }
 
+    getQuestions(event){
+        const category = event.target.value;
+        console.log('category is ' + category);
+        this.props.dispatch(fetchQuestions(category,"hard"));
+
+    }
 
     render(){
-        const topics = this.state.topics.map((topic, index) => (
+        const topics = Object.keys(Categories).map((topic, index) => (
             <li key={index}>
-                <button className='topic-button' value={topic}>{topic}</button>
-            </li>  
+                <button className='topic-button' onClick={this.getQuestions} value={Categories[topic]}>{topic}</button>
+            </li>
         ));
         return (
             <section className="header">
@@ -29,3 +32,6 @@ export default class Header extends React.Component {
         )
     }
 }
+
+
+export default connect()(Header);
