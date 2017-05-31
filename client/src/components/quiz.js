@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { selectAnswer, submitQuiz } from "../actions/action";
-
+import $ from 'jquery'; 
+import './quiz.css';
 import { _ } from "underscore";
 
 export class Quiz extends React.Component {
@@ -17,11 +18,16 @@ export class Quiz extends React.Component {
     const value = event.target.value;
 
     this.props.dispatch(selectAnswer(index, value));
+    
+    $(event.target).siblings('button').removeClass('green');
+    $(event.target).addClass('green');
   }
 
   handleSubmit(event){
     this.props.dispatch(submitQuiz());
-  }
+    $('.score-container').removeAttr('hidden');
+    };
+  
 
   render() {
     const questions = this.props.questions.map((question, index) => {
@@ -44,7 +50,7 @@ export class Quiz extends React.Component {
         );
       });
       return (
-        <li key={index}>
+        <li className='question-box'key={index}>
           {question.question}<br />
           {choices}
         </li>
@@ -56,7 +62,8 @@ export class Quiz extends React.Component {
         <ul id="questionList">
           {questions}
           <li>
-            <button onClick={this.handleSubmit} >Submit</button>
+            <button className='submit-button' onClick={this.handleSubmit}>Submit</button>
+            <div hidden className='score-container'>Your Score:{this.props.score}0%</div>
           </li>
         </ul>
         
@@ -69,7 +76,8 @@ export class Quiz extends React.Component {
 
 const mapStateToProps = state => ({
   scoreKeys: state.scoreKeys,
-  questions: state.questions
+  questions: state.questions,
+  score: state.score
 });
 
 export default connect(mapStateToProps)(Quiz);

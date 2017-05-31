@@ -15,6 +15,7 @@ const initialState = {
 };
 
 export default function reducer(state=initialState, action) {
+  state = Object.assign({}, state);
   if(action.type === FETCH_QUESTIONS_REQUEST) {
     return Object.assign({}, state, {
       loading: true,
@@ -28,6 +29,7 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === FETCH_QUESTIONS_SUCCESS){
+    
     const answerArray = _.pluck(action.questions, 'correct_answer');
     return Object.assign({}, state, {
       questions: action.questions,
