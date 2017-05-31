@@ -1,6 +1,11 @@
 const path = require('path');
 const express = require('express');
 
+let knex = require('knex')({
+  client: 'pg',
+  connection: 'postgres://ryutqlmo:veCNdcwIHiGuFX9XjqdeebVGBkjV3UHb@stampy.db.elephantsql.com:5432/ryutqlmo'
+});
+
 const app = express();
 
 // API endpoints go here!
@@ -14,6 +19,27 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
     res.sendFile(index);
+});
+
+app.get('/api/users/:userId',(req,res,next)=>{
+    knex.insert({name:'name'}).into('users').then(e=>{
+      knex.select().from('users').then(function(e){
+        console.log(e);
+      });
+    })
+    res.send('Working!').end();
+})
+
+app.put('/api/users',(req,res,next)=>{
+    res.send('Working!').end();
+})
+
+app.post('/api/users',(req,res,next)=>{
+  //knex('users').insert({}).returning('*').toString();
+  knex('users').insert({name: "Anonymous"}).into('users').then(e=>{
+    console.log("done!");
+  })
+
 });
 
 let server;
