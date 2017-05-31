@@ -1,5 +1,5 @@
 import {FETCH_QUESTIONS_REQUEST, FETCH_QUESTIONS_SUCCESS,
-        FETCH_QUESTIONS_ERROR, SELECT_ANSWER} from '../actions/action';
+        FETCH_QUESTIONS_ERROR, SELECT_ANSWER, SUBMIT_QUIZ} from '../actions/action';
 import {_} from 'underscore';
 
 const initialState = {
@@ -9,8 +9,9 @@ const initialState = {
   loading: false,
   error: null,
   scoreTracker: [],
-  scoreKeys: []
-
+  scoreKeys: [],
+  checkAnswerArray: [],
+  score: 0
 };
 
 export default function reducer(state=initialState, action) {
@@ -45,6 +46,33 @@ export default function reducer(state=initialState, action) {
     return Object.assign({}, state, {
       scoreTracker: scoreCopy
     });
+  }
+  else if(action.type === SUBMIT_QUIZ){
+    state.checkAnswerArray = state.scoreTracker.map((value, index) => {
+      if(value === state.scoreKeys[index]) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
+    });
+    console.log(state.checkAnswerArray);
+
+    state.score = state.checkAnswerArray.reduce(function(acc, val) {
+      return acc + val;
+    }, 0);
+
+    console.log(state.score);
+    const category = state.questions[0].category;
+    if(!state.scoreTotals.hasOwnProperty(state.questions[0].category)) {
+      
+      state.scoreTotals[category] = [0,0];
+      console.log('hello world');
+      
+    }
+    state.scoreTotals[category][0] += state.score;
+    state.scoreTotals[category][1] += 10;
+    console.log(state.questions[0].category);
   }
 
   return state;

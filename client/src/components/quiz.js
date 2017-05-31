@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectAnswer } from "../actions/action";
+import { selectAnswer, submitQuiz } from "../actions/action";
 
 import { _ } from "underscore";
 
@@ -16,6 +16,7 @@ export class Quiz extends React.Component {
     const value = event.target.value;
 
     this.props.dispatch(selectAnswer(index, value));
+    this.props.dispatch(submitQuiz());
   }
 
   render() {

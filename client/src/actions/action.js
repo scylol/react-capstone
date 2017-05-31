@@ -24,7 +24,12 @@ export const selectAnswer = (index, value) => ({
   value
 });
 
-export const fetchQuestions = (category,difficulty) => dispatch => {
+export const SUBMIT_QUIZ = 'SUBMIT_QUIZ';
+export const submitQuiz = () => ({
+  type: SUBMIT_QUIZ
+});
+
+export const fetchQuestions = (category) => dispatch => {
   //console.log('called fetch questions');
   dispatch(fetchQuestionsRequest());
   //console.log(category);
