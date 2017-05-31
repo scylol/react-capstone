@@ -8,6 +8,7 @@ export class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.handleAnswer = this.handleAnswer.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleAnswer(event) {
@@ -16,6 +17,9 @@ export class Quiz extends React.Component {
     const value = event.target.value;
 
     this.props.dispatch(selectAnswer(index, value));
+  }
+
+  handleSubmit(event){
     this.props.dispatch(submitQuiz());
   }
 
@@ -48,9 +52,17 @@ export class Quiz extends React.Component {
     });
 
     return (
-      <ul id="questionList">
-        {questions}
-      </ul>
+      <div> 
+        <ul id="questionList">
+          {questions}
+          <li>
+            <button onClick={this.handleSubmit} >Submit</button>
+          </li>
+        </ul>
+        
+
+      </div> 
+
     );
   }
 }
