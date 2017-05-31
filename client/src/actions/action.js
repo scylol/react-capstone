@@ -28,7 +28,7 @@ export const fetchQuestions = (category,difficulty) => dispatch => {
   console.log('called fetch questions');
   dispatch(fetchQuestionsRequest());
   console.log(category);
-  fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${category}&difficulty=${difficulty}`).then(res => {
+  fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${category}`).then(res => {
     if(!res.ok) {
       return Promise.reject(res.statusText);
     }
@@ -40,3 +40,5 @@ export const fetchQuestions = (category,difficulty) => dispatch => {
     dispatch(fetchQuestionsError(error));
   });
 };
+
+// &difficulty=${difficulty}

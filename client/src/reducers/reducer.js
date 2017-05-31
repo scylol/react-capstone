@@ -30,11 +30,11 @@ export default function reducer(state=initialState, action) {
   else if(action.type === FETCH_QUESTIONS_SUCCESS){
     const answerArray = _.pluck(action.questions, 'correct_answer'); 
     return Object.assign({}, state, { 
-        questions: action.questions,
-        loading: false,
-        error: null,
-        scoreKeys: answerArray 
-      });
+      questions: action.questions,
+      loading: false,
+      error: null,
+      scoreKeys: answerArray 
+    });
   }
   else if(action.type === SELECT_ANSWER){
     console.log(action.value);

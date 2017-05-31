@@ -3,6 +3,8 @@ import Categories from '../config'
 import {fetchQuestions} from '../actions/action'
 import {connect} from 'react-redux'
 
+import './header.css';
+
 export class Header extends React.Component {
     constructor (props) {
         super(props);
@@ -18,7 +20,7 @@ export class Header extends React.Component {
 
     render(){
         const topics = Object.keys(Categories).map((topic, index) => (
-            <li key={index}>
+            <li key={index} className='topic-item'>
                 <button className='topic-button' onClick={this.getQuestions} value={Categories[topic]}>{topic}</button>
             </li>
         ));
