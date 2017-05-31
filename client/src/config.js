@@ -16,10 +16,6 @@ const Categories = {
   History: 23,
   Politics: 24,
   Art: 25
-  
-  
-  
-  
- 
 };
+
 export default Categories;

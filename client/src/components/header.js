@@ -13,7 +13,7 @@ export class Header extends React.Component {
 
     getQuestions(event){
         const category = event.target.value;
-        console.log('category is ' + category);
+        //console.log('category is ' + category);
         this.props.dispatch(fetchQuestions(category,"hard"));
 
     }
@@ -27,7 +27,7 @@ export class Header extends React.Component {
         return (
             <section className="header">
                 <h1> Quiz App </h1>
-                <ul id ='topic-list'>
+                <ul id='topic-list'>
                     {topics}
                 </ul>
                 {/*<button onClick={}>Submit</button>*/}

@@ -11,8 +11,10 @@ export class Quiz extends React.Component {
   }
 
   handleAnswer(event) {
-    const index = event.target.key;
-    const value = event.target.questionId;
+    const values = event.target.id.split(',')
+    const index = values[0];
+    const value = event.target.value;
+
     this.props.dispatch(selectAnswer(index, value));
   }
 
@@ -28,9 +30,9 @@ export class Quiz extends React.Component {
           <button
             className="choice-button"
             onClick={this.handleAnswer}
-            questionId={index}
             value={choice}
             key={index2}
+            id={[index,index2]}
           >
             {choice}
           </button>

@@ -25,16 +25,16 @@ export const selectAnswer = (index, value) => ({
 });
 
 export const fetchQuestions = (category,difficulty) => dispatch => {
-  console.log('called fetch questions');
+  //console.log('called fetch questions');
   dispatch(fetchQuestionsRequest());
-  console.log(category);
+  //console.log(category);
   fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${category}`).then(res => {
     if(!res.ok) {
       return Promise.reject(res.statusText);
     }
     return res.json();
   }).then(data => {
-    console.log(data.results);
+    //console.log(data.results);
     dispatch(fetchQuestionsSuccess(data.results));
   }).catch(error => {
     dispatch(fetchQuestionsError(error));
