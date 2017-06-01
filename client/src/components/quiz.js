@@ -26,16 +26,37 @@ export class Quiz extends React.Component {
   handleSubmit(event){
     this.props.dispatch(submitQuiz());
     $('.score-container').removeAttr('hidden');
-    };
+    
+  };
 
 
   render() {
+    // $(`#b${ind}`).addClass('red')
+    console.log('RENDERING QUIZ')
     const questions = this.props.questions.map((question, index) => {
-
+      let color;
+      if(this.props.checkAnswerArray.length > 0) {
+        if(this.props.checkAnswerArray[index] === 1) {
+          color = 'light-green';
+        }
+        else {
+          color = 'light-red';
+        }
+      }
       const choices = this.props.questions[index].choices.map((choice, index2) => {
+        let buttonColor;
+          if(this.props.checkAnswerArray.length > 0) {
+            if(choice === this.props.scoreTracker[index]) {
+              buttonColor = 'red';
+            }
+            if (choice === this.props.scoreKeys[index]) {
+              buttonColor = 'green';
+            }
+          }
+
         return (
           <button
-            className="choice-button"
+            className={`choice-button ${buttonColor}`}
             onClick={this.handleAnswer}
             value={choice}
             key={index2}
@@ -46,8 +67,8 @@ export class Quiz extends React.Component {
         );
       });
       return (
-        <li className='question-box'key={index}>
-          {question.question}<br />
+        <li id={`b${index}`} className={`question-box ${color}`} key={index}>
+        {question.question}<br />
           {choices}
         </li>
       );
@@ -73,9 +94,9 @@ export class Quiz extends React.Component {
 const mapStateToProps = state => ({
   scoreKeys: state.scoreKeys,
   scoreTracker: state.scoreTracker,
-  
   questions: state.questions,
   score: state.score,
+  checkAnswerArray: state.checkAnswerArray
 });
 
 export default connect(mapStateToProps)(Quiz);

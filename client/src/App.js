@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { connect } from "react-redux";
-import ReactTransitions from 'react-transitions';
+
 
 import Quiz from './components/quiz.js';
 

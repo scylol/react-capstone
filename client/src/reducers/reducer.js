@@ -36,7 +36,7 @@ export default function reducer(state=initialState, action) {
 
       let answers = _.shuffle([...val, answerArray[ind]]);
       action.questions[ind].choices = answers;
-    })
+    });
 
     console.log(choice);
     return Object.assign({}, state, {
@@ -44,7 +44,7 @@ export default function reducer(state=initialState, action) {
       loading: false,
       error: null,
       scoreKeys: answerArray,
-
+      checkAnswerArray: []
     });
   }
   else if(action.type === SELECT_ANSWER){
