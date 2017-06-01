@@ -75,14 +75,18 @@ export default function reducer(state=initialState, action) {
     state.scoreTotals[category][0] += state.score;
     state.scoreTotals[category][1] += 10;
     console.log(state.questions[0].category);
-    fetch(`/api/users/${state.userToken}`,{
+    console.log(state.userToken);
+    fetch(`/api/users/${state.userToken.toString()}`,{
       method: 'PUT',
       headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: {"scores": state.scoreTotals}
-  }).then(res=>res.json());
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({'scores': state.scoreTotals})
+    }).then(res=>res.json())
+    .catch(err => {
+      console.log(err);
+    });
   }
   else if(action.type === SET_USER_DATA) {
     console.log(action.value);

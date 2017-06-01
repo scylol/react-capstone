@@ -41,7 +41,8 @@ app.put('/api/users/:id',(req,res,next)=>{
     .returning(['scores'])
     .then(result => {
       res.json(result[0]).end();
-    });
+    })
+    .catch(err => console.error(err));
 
 });
 
