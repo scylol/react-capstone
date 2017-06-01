@@ -14,7 +14,7 @@ export class Header extends React.Component {
     getQuestions(event){
         const category = event.target.value;
         //console.log('category is ' + category);
-        this.props.dispatch(fetchQuestions(category,"hard"));
+        this.props.dispatch(fetchQuestions(category));
 
     }
 

@@ -29,7 +29,7 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === FETCH_QUESTIONS_SUCCESS){
-    
+
     const answerArray = _.pluck(action.questions, 'correct_answer');
     return Object.assign({}, state, {
       questions: action.questions,
@@ -67,14 +67,22 @@ export default function reducer(state=initialState, action) {
     console.log(state.score);
     const category = state.questions[0].category;
     if(!state.scoreTotals.hasOwnProperty(state.questions[0].category)) {
-      
+
       state.scoreTotals[category] = [0,0];
       console.log('hello world');
-      
+
     }
     state.scoreTotals[category][0] += state.score;
     state.scoreTotals[category][1] += 10;
     console.log(state.questions[0].category);
+    fetch(`/api/users/${state.userToken}`,{
+      method: 'PUT',
+      headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: {"scores": state.scoreTotals}
+  }).then(res=>res.json());
   }
   else if(action.type === SET_USER_DATA) {
     console.log(action.value);
