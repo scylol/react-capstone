@@ -29,6 +29,12 @@ export const submitQuiz = () => ({
   type: SUBMIT_QUIZ
 });
 
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const setUserData = (value) => ({
+  type: SET_USER_DATA,
+  value
+});
+
 export const fetchQuestions = (category) => dispatch => {
   //console.log('called fetch questions');
   dispatch(fetchQuestionsRequest());

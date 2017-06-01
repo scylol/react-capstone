@@ -47,7 +47,7 @@ app.put('/api/users/:id',(req,res,next)=>{
 
 app.post('/api/users',(req,res,next)=>{
   //knex('users').insert({}).returning('*').toString();
-  knex('users').insert({name: req.body.name, scores: req.body.scores}).into('users').returning(['name', 'scores'])
+  knex('users').insert({name: req.body.name}).into('users').returning(['name', 'id', 'scores'])
   .then(e=>{
     console.log('done!');
     res.send(e);
