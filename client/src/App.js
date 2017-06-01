@@ -7,6 +7,8 @@ import Quiz from './components/quiz.js';
 
 import Header from './components/header.js';
 
+import UserHistory from './components/userHistory';
+
 import { setUserData } from "./actions/action";
 
 
@@ -62,6 +64,7 @@ class App extends Component {
     return (
       <div className="App">
        <Header />
+       <UserHistory />
        <Quiz />
       </div>
     );
