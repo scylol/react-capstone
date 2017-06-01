@@ -12,14 +12,21 @@ export class Header extends React.Component {
     this.getQuestions = this.getQuestions.bind(this);
     this.showHistory = this.showHistory.bind(this);
     this.state = {
-        showHistory: false 
-    }; 
+        showHistory: false
+    };
   }
 
   getQuestions(event) {
     const category = event.target.value;
     //console.log('category is ' + category);
     this.props.dispatch(fetchQuestions(category));
+    this.forceHideHistory();
+  }
+
+  forceHideHistory(){
+    this.setState({
+        showHistory: false
+    });
   }
 
   showHistory(){
@@ -27,7 +34,7 @@ export class Header extends React.Component {
          showHistory: !this.state.showHistory
      });
   }
-  
+
 
   render() {
     const topics = Object.keys(Categories).map((topic, index) => (
@@ -49,7 +56,7 @@ export class Header extends React.Component {
       <section className="header">
         <h1> Quiz App </h1>
         <ul id="topic-list">{topics}</ul>
-        {/*<button onClick={this.showHistory}>UserHistory</button>*/}
+        {<button onClick={this.showHistory}>UserHistory</button>}
         {historyState}
 
       </section>
@@ -57,6 +64,8 @@ export class Header extends React.Component {
   }
 }
 
+const mapStateToProps = (state)=>({
+  scoreTotals: state.scoreTotals
+})
 
-
-export default connect()(Header);
+export default connect(mapStateToProps)(Header);

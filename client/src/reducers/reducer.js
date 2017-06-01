@@ -29,13 +29,22 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === FETCH_QUESTIONS_SUCCESS){
-
+    const incorrectAnswers = _.pluck(action.questions, 'incorrect_answers');
     const answerArray = _.pluck(action.questions, 'correct_answer');
+
+    let choice = incorrectAnswers.forEach((val,ind)=>{
+
+      let answers = _.shuffle([...val, answerArray[ind]]);
+      action.questions[ind].choices = answers;
+    })
+
+    console.log(choice);
     return Object.assign({}, state, {
       questions: action.questions,
       loading: false,
       error: null,
-      scoreKeys: answerArray
+      scoreKeys: answerArray,
+
     });
   }
   else if(action.type === SELECT_ANSWER){
@@ -45,7 +54,7 @@ export default function reducer(state=initialState, action) {
 
     scoreCopy[action.index] = action.value;
     // console.log(scoreCopy);
-    return Object.assign({}, state, {
+    state = Object.assign({}, state, {
       scoreTracker: scoreCopy
     });
   }
@@ -75,7 +84,6 @@ export default function reducer(state=initialState, action) {
     state.scoreTotals[category][0] += state.score;
     state.scoreTotals[category][1] += 10;
     console.log(state.questions[0].category);
-    console.log(state.userToken);
     fetch(`/api/users/${state.userToken.toString()}`,{
       method: 'PUT',
       headers: {
@@ -91,7 +99,7 @@ export default function reducer(state=initialState, action) {
   else if(action.type === SET_USER_DATA) {
     console.log(action.value);
     console.log(action.value.scores);
-    return Object.assign({}, state, {
+    state = Object.assign({}, state, {
       userToken: action.value.id,
       scoreTotals: action.value.scores
     });

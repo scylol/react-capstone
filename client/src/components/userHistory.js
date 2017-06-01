@@ -28,7 +28,8 @@ return (
 
 
 const mapStateToProps = state => ({
-  scoreTotals: state.scoreTotals
+  scoreTotals: state.scoreTotals,
+  scoreTracker: state.scoreTracker
 });
 
 export default connect(mapStateToProps)(UserHistory);

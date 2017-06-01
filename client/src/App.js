@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { connect } from "react-redux";
+import ReactTransitions from 'react-transitions';
 
 import Quiz from './components/quiz.js';
 
 import Header from './components/header.js';
-
-import UserHistory from './components/userHistory';
 
 import { setUserData } from "./actions/action";
 
@@ -34,10 +33,10 @@ class App extends Component {
         .then(res => {
           console.log(res);
           this.props.dispatch(setUserData(res));
-        }) 
+        })
       }
     });
-    
+
 
     if(!cookieIdexists) {
       return fetch('/api/users', {
@@ -60,11 +59,10 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <div className="App">
        <Header />
-       <UserHistory />
        <Quiz />
       </div>
     );
