@@ -15,7 +15,7 @@ Quizicle is a very simple app that allows users to take quizzes on various topic
 [User History](https://gyazo.com/b92f47e01a3635d9ebdfed8f9ca03b50)
 
 ### Technology Used
-HTML, CSS, Javascript, SQL db, knex,  react, redux,
+HTML, CSS, Javascript, SQL db, knex,  react, redux
 
 
 
