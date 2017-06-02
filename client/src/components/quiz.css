@@ -1,13 +1,17 @@
 .green {
     background-color:#CEE8B3;
+    box-shadow: inset 5px -10px 10px #aEc893;
 }
 
 .red {
-    background-color:#E8B3B4;
+    background-color:#FF6B6B;
+    color: F7FFF7;
+    box-shadow: inset 5px -10px 10px #dF4B4B;
 }
 
 .light-red {
     background-color: #F2E4E4 ;
+
 }
 
 .light-green {

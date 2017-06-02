@@ -20,21 +20,31 @@ export class Quiz extends React.Component {
     this.props.dispatch(selectAnswer(index, value));
 
     $(event.target).siblings('button').removeClass('green');
+    $(event.target).siblings('button').removeClass('pure-button-active');
     $(event.target).addClass('green');
+    $(event.target).addClass('pure-button-active');
   }
 
   handleSubmit(event){
     this.props.dispatch(submitQuiz());
     $('.score-container').removeAttr('hidden');
-    
+
   };
 
 
   render() {
     // $(`#b${ind}`).addClass('red')
     console.log('RENDERING QUIZ')
-    const questions = this.props.questions.map((question, index) => {
-      let color;
+    let questions = this.props.questions.map((question, index) => {
+
+      //parse out the annoying strings
+      question.question = question.question.replace(/(&quot\;)/g,"\"")
+      question.question = question.question.replace(/(&#039;)/g,"\'")
+      question.question = question.question.replace(/(&ldquo;)/g,"\"")
+      question.question = question.question.replace(/(&amp;)/g,"\&")
+
+
+      let color = "";
       if(this.props.checkAnswerArray.length > 0) {
         if(this.props.checkAnswerArray[index] === 1) {
           color = 'light-green';
@@ -44,7 +54,11 @@ export class Quiz extends React.Component {
         }
       }
       const choices = this.props.questions[index].choices.map((choice, index2) => {
-        let buttonColor;
+        choice = choice.replace(/(&quot\;)/g,"\"")
+        choice = choice.replace(/(&#039;)/g,"\'")
+        choice = choice.replace(/(&ldquo;)/g,"\"")
+        choice = choice.replace(/(&amp;)/g,"\&")
+        let buttonColor = "";
           if(this.props.checkAnswerArray.length > 0) {
             if(choice === this.props.scoreTracker[index]) {
               buttonColor = 'red';
@@ -56,7 +70,7 @@ export class Quiz extends React.Component {
 
         return (
           <button
-            className={`choice-button ${buttonColor}`}
+            className={`choice-button pure-button ${buttonColor}`}
             onClick={this.handleAnswer}
             value={choice}
             key={index2}
@@ -68,22 +82,28 @@ export class Quiz extends React.Component {
       });
       return (
         <li id={`b${index}`} className={`question-box ${color}`} key={index}>
-        {question.question}<br />
+        <h3>{question.question}</h3>
           {choices}
         </li>
       );
     });
-
+    let button = "";
+    if(questions.length > 0){
+      button = <button className='submit-button pure-button' onClick={this.handleSubmit}>Submit</button>;
+    }
+    if(!questions.length > 0){
+      questions = <h2>Please pick a quiz!</h2>
+    }
     return (
       <div>
+
         <ul id="questionList">
           {questions}
           <li>
-            <button className='submit-button' onClick={this.handleSubmit}>Submit</button>
-            <div hidden className='score-container'>Your Score:{this.props.score}0%</div>
+            <div hidden className='score-container'><h2>Your Score:{this.props.score}0%</h2></div>
           </li>
         </ul>
-
+        {button}
 
       </div>
 
