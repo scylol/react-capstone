@@ -1,4 +1,4 @@
-[![cat logo](https://cloud.githubusercontent.com/assets/25944411/26742565/2dfc7cf4-47ac-11e7-8960-4f3888253340.png)](https://still-cliffs-73963.herokuapp.com/)
+[![catlogo5](https://cloud.githubusercontent.com/assets/25944411/26743052/54b724d2-47ae-11e7-9e1e-b0e6268aadfe.png)](https://still-cliffs-73963.herokuapp.com/)
 ## Why Quizicle
 If you ever want to sit back and relax and see how smart you are, look no further. The reason why Quizicle is a great place to show off your skills is because it records all of your quiz results. This is what makes Quizicle such a fun place to be. You will know the areas you struggle in, as well as the areas you are dominant in. Our first priority is to be a place to go to have fun, but we will also allow users to grow their understanding of various topics by giving them their stats on quizzes they have previously taken. What are you waiting for? Go see how awesome you are!
 
