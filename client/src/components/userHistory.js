@@ -10,11 +10,10 @@ render() {
     console.log('rendered!!');
 const results = Object.keys(this.props.scoreTotals).map((item, index) => {
             let quizPercentage = this.props.scoreTotals[item][0] / this.props.scoreTotals[item][1];
-            return  <li key={index} className='resultItem'>
-                    <h1>{item}</h1>
-                    <p>{this.props.scoreTotals[item][0]}/{this.props.scoreTotals[item][1]}</p>
-                    <p>{quizPercentage * 100 }%</p>
-                </li>
+            return  <div key={index} className='resultItem'>
+                    <h2>{item}</h2>
+                    <p><b>{(quizPercentage * 100).toFixed(0) }%</b> or <b>{this.props.scoreTotals[item][0]}/{this.props.scoreTotals[item][1]}</b> questions</p>                    
+                </div>
             });
 
 return (

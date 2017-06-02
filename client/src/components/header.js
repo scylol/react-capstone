@@ -20,13 +20,6 @@ export class Header extends React.Component {
     const category = event.target.value;
     //console.log('category is ' + category);
     this.props.dispatch(fetchQuestions(category));
-    this.forceHideHistory();
-  }
-
-  forceHideHistory(){
-    this.setState({
-        showHistory: false
-    });
   }
 
   showHistory(){
@@ -40,7 +33,7 @@ export class Header extends React.Component {
     const topics = Object.keys(Categories).map((topic, index) => (
       <li key={index} className="topic-item">
         <button
-          className="topic-button"
+          className="topic-button pure-button"
           onClick={this.getQuestions}
           value={Categories[topic]}>
           {topic}
@@ -54,11 +47,10 @@ export class Header extends React.Component {
     }
     return (
       <section className="header">
-        <h1> Quiz App </h1>
+        <h1><img src="img/cat-tied-icon.png" title="Cat" width="64" height="64"/> Quizical </h1>
         <ul id="topic-list">{topics}</ul>
-        {<button onClick={this.showHistory}>UserHistory</button>}
         {historyState}
-
+        {<button className="historyButton pure-button" onClick={this.showHistory}>UserHistory</button>}
       </section>
     );
   }

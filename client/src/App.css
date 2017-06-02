@@ -1,24 +1,97 @@
+* {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+}
+
 .App {
   text-align: center;
+  background: #F7FFF7;
+  background-image: url('https://www.transparenttextures.com/patterns/blizzard.png');
+  font-family: 'Comfortaa', cursive;
+  font-weight: bolder;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.header{
+  margin-top: 0;
+  padding-top: 0;
+  background: #FFE66D;
+  background-image: url('https://www.transparenttextures.com/patterns/otis-redding.png');
+  border-bottom: 8px solid black;
+}
+.header h1{
+  margin-top: 0;
+  font-size: 3em;
+  margin-bottom: 0;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.header img{
+  transform: translateY(10px);
 }
 
-.App-intro {
-  font-size: large;
+.header .resultItem{
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid black;
+  border-radius: 0.3em;
+  /*#7EfDE4;*/
+  background: rgba(255,255,255,0);
+  box-shadow: inset 1px -1px 3px #1A535C;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.header .resultItem h2{
+  font-size: 1.3em;
+  margin-top: 0px;
+  padding-top: 0px;
+
+}
+
+.header button{
+  box-shadow: inset 5px -10px 10px #CBD1CB, 1px 1px 5px darkgrey;
+
+}
+
+.header .historyButton{
+  margin-bottom: 0px;
+  padding: 0.3em;
+  transform: translateY(0.7em);
+
+  border-bottom: 2px solid black;
+  border-radius: 10px;
+}
+
+button, pure-button{
+  margin: 0.5em;
+  box-shadow: inset 5px -10px 10px #CBD1CB,1px 1px 5px darkgrey;
+  /*text-shadow: 0px 0px 1px black;*/
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  list-style: none;
+}
+
+.question-box{
+  padding: 1em;
+  border-bottom: 1px dashed #CBD1CB;
+  background-clip:border-box;
+  box-shadow: inset 0 -7px 10px #CBD1CB;
+}
+.question-box h3{
+  margin-bottom: 0.1em;
+}
+
+.submit-button{
+  margin-bottom: 1em;
+  font-size: 2em;
+  padding: 0.2em 1em;
+  font-weight: bold;
+
 }
