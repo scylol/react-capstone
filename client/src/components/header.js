@@ -15,13 +15,13 @@ export class Header extends React.Component {
         showHistory: false
     };
   }
-
+//Calls the fetchQuestion action to fetch questions from the API according to the category clicked
   getQuestions(event) {
     const category = event.target.value;
-    //console.log('category is ' + category);
     this.props.dispatch(fetchQuestions(category));
   }
 
+//Toggles the User History
   showHistory(){
      this.setState({
          showHistory: !this.state.showHistory
@@ -30,6 +30,7 @@ export class Header extends React.Component {
 
 
   render() {
+// Maps through the Categories object to make a button for each of them    
     const topics = Object.keys(Categories).map((topic, index) => (
       <li key={index} className="topic-item">
         <button
@@ -40,7 +41,7 @@ export class Header extends React.Component {
         </button>
       </li>
     ));
-
+// if true shows UserHistory component, else shows nothing.
     let historyState = "";
     if(this.state.showHistory) {
         historyState = <UserHistory />

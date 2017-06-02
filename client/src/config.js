@@ -1,3 +1,5 @@
+// Categories that are imported in quiz component to make category buttons
+// Numbers are the category number used in the API endpoint.
 const Categories = {
   General: 9,
   Books: 10,

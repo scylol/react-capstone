@@ -11,7 +11,7 @@ export class Quiz extends React.Component {
     this.handleAnswer = this.handleAnswer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+//Turns the selected answer to greeen, as well as dispatches the selectAnswer action which will put the selected answer into array according to its index.
   handleAnswer(event) {
     const values = event.target.id.split(',')
     const index = values[0];
@@ -24,26 +24,23 @@ export class Quiz extends React.Component {
     $(event.target).addClass('green');
     $(event.target).addClass('pure-button-active');
   }
-
+//dispatches the submit Quiz action which compares the user's answers to the correct answers, then pushes them to the database.
   handleSubmit(event){
     this.props.dispatch(submitQuiz());
     $('.score-container').removeAttr('hidden');
+};
 
-  };
-
-
-  render() {
-    // $(`#b${ind}`).addClass('red')
-    console.log('RENDERING QUIZ')
+render() {
     let questions = this.props.questions.map((question, index) => {
-
-      //parse out the annoying strings
+//parse out the annoying strings from the API
       question.question = question.question.replace(/(&quot\;)/g,"\"")
+      question.question = question.question.replace(/(&rdquo\;)/g,"\"")
       question.question = question.question.replace(/(&#039;)/g,"\'")
       question.question = question.question.replace(/(&ldquo;)/g,"\"")
       question.question = question.question.replace(/(&amp;)/g,"\&")
       question.question = question.question.replace(/(&shy;)/g,"\-")
-
+      question.question = question.question.replace(/(Pok&eacute;)/g,"\Poke")
+// sets the background color to green or red depending on correct or incorrect.
       let color = "";
       if(this.props.checkAnswerArray.length > 0) {
         if(this.props.checkAnswerArray[index] === 1) {
@@ -54,11 +51,16 @@ export class Quiz extends React.Component {
         }
       }
       const choices = this.props.questions[index].choices.map((choice, index2) => {
+//parse out the annoying strings from the API        
         choice = choice.replace(/(&quot\;)/g,"\"")
+        choice = choice.replace(/(&rdquo\;)/g,"\"")
         choice = choice.replace(/(&#039;)/g,"\'")
         choice = choice.replace(/(&ldquo;)/g,"\"")
         choice = choice.replace(/(&amp;)/g,"\&")
         choice = choice.replace(/(&shy;)/g,"\-")
+        choice = choice.replace(/(Pok&eacute;)/g,"\Poke")
+        
+// sets the background color to green or red depending on correct or incorrect.
         let buttonColor = "";
           if(this.props.checkAnswerArray.length > 0) {
             if(choice === this.props.scoreTracker[index]) {

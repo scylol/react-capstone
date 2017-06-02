@@ -29,16 +29,15 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === FETCH_QUESTIONS_SUCCESS){
+// make array of arrays of the incorrect answers
     const incorrectAnswers = _.pluck(action.questions, 'incorrect_answers');
+// make an array of the correct answers    
     const answerArray = _.pluck(action.questions, 'correct_answer');
-
-    let choice = incorrectAnswers.forEach((val,ind)=>{
-
-      let answers = _.shuffle([...val, answerArray[ind]]);
+//make a choices array by combinining the 2 arrays above, and shuffling them
+     incorrectAnswers.forEach((val,ind)=>{
+       let answers = _.shuffle([...val, answerArray[ind]]);
       action.questions[ind].choices = answers;
     });
-
-    console.log(choice);
     return Object.assign({}, state, {
       questions: action.questions,
       loading: false,
@@ -48,17 +47,15 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === SELECT_ANSWER){
-    //console.log(action.value);
+//create a copy of scoreTracker    
     let scoreCopy = state.scoreTracker.slice(0);
-    //console.log(scoreCopy);
-
-    scoreCopy[action.index] = action.value;
-    // console.log(scoreCopy);
-    state = Object.assign({}, state, {
+     scoreCopy[action.index] = action.value;
+      state = Object.assign({}, state, {
       scoreTracker: scoreCopy
     });
   }
   else if(action.type === SUBMIT_QUIZ){
+// if answered corrected, add 1, else add a 0    
     state.checkAnswerArray = state.scoreTracker.map((value, index) => {
       if(value === state.scoreKeys[index]) {
         return 1;
@@ -67,24 +64,23 @@ export default function reducer(state=initialState, action) {
         return 0;
       }
     });
-    console.log(state.checkAnswerArray);
-
+   
+//Sums the checkAnswer Array.
     state.score = state.checkAnswerArray.reduce(function(acc, val) {
       return acc + val;
     }, 0);
-
-    console.log(state.score);
+// set category equal to the current category of the quiz
     const category = state.questions[0].category;
+// spread through state.scoreTotals
     state.scoreTotals = {...state.scoreTotals};
+//If it doesn't have the property of Category, add it.
     if(!state.scoreTotals.hasOwnProperty(state.questions[0].category)) {
-
       state.scoreTotals[category] = [0,0];
-      console.log('hello world');
-
     }
+//Add the score to the numerator, add 10 to denominator
     state.scoreTotals[category][0] += state.score;
     state.scoreTotals[category][1] += 10;
-    console.log(state.questions[0].category);
+//Updates the Users score inside the database
     fetch(`/api/users/${state.userToken.toString()}`,{
       method: 'PUT',
       headers: {
@@ -98,8 +94,7 @@ export default function reducer(state=initialState, action) {
     });
   }
   else if(action.type === SET_USER_DATA) {
-    console.log(action.value);
-    console.log(action.value.scores);
+//sets the State based on the User's Cookie.
     state = Object.assign({}, state, {
       userToken: action.value.id,
       scoreTotals: action.value.scores

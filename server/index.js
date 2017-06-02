@@ -13,8 +13,6 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// API endpoints go here!
-
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -26,7 +24,7 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
   res.sendFile(index);
 });
 
-app.get('/api/users/:id',(req,res,next)=>{
+app.get('/api/users/:id',(req,res)=>{
   let {id} = req.params;
   knex.select().from('users').where('id', id).then(result => {
     console.log(result);
@@ -34,7 +32,7 @@ app.get('/api/users/:id',(req,res,next)=>{
   });
 });
 
-app.put('/api/users/:id',(req,res,next)=>{
+app.put('/api/users/:id',(req,res)=>{
   knex('users')
     .where('id', req.params.id)
     .update({scores: req.body.scores})
@@ -42,28 +40,14 @@ app.put('/api/users/:id',(req,res,next)=>{
     .then(result => {
       res.json(result[0]).end();
     });
-
 });
 
-app.put('/api/users/:id',(req,res,next)=>{
-  knex('users')
-    .where('id', req.params.id)
-    .update({scores: req.body.scores})
-    .returning(['scores'])
-    .then(result => {
-      res.json(result[0]).end();
-    });
-
-});
-
-app.post('/api/users',(req,res,next)=>{
-  //knex('users').insert({}).returning('*').toString();
+app.post('/api/users',(req,res)=>{
   knex('users').insert({name: req.body.name}).into('users').returning(['name', 'id', 'scores'])
   .then(e=>{
     console.log('done!');
     res.send(e);
   });
-
 });
 
 let server;

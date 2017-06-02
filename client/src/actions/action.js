@@ -1,4 +1,3 @@
-//sync action to confirm the receipt of the API request
 export const FETCH_QUESTIONS_REQUEST = 'FETCH_QUESTIONS_REQUEST';
 export const fetchQuestionsRequest = () => ({
   type: FETCH_QUESTIONS_REQUEST
@@ -35,21 +34,18 @@ export const setUserData = (value) => ({
   value
 });
 
-export const fetchQuestions = (category) => (dispatch, getState) => {
-  //console.log('called fetch questions');
+export const fetchQuestions = (category) => (dispatch) => {
   dispatch(fetchQuestionsRequest());
-  //console.log(category);
   fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${category}`).then(res => {
     if(!res.ok) {
       return Promise.reject(res.statusText);
     }
     return res.json();
   }).then(data => {
-    //console.log(data.results);
     dispatch(fetchQuestionsSuccess(data.results));
   }).catch(error => {
     dispatch(fetchQuestionsError(error));
   });
 };
 
-// &difficulty=${difficulty}
+

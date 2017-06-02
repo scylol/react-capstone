@@ -14,7 +14,7 @@ import { setUserData } from "./actions/action";
 
 class App extends Component {
 
-
+//makes a get request to the database if the cookie exists to set the User Data History in the state.
   componentDidMount(){
     let cookieIdexists = false;
     let cookieId = document.cookie.split(';').map((val) => {
@@ -37,7 +37,7 @@ class App extends Component {
       }
     });
 
-
+// If cookie doesn't exists, create a user in the database. Then set the state like above.
     if(!cookieIdexists) {
       return fetch('/api/users', {
         method: 'POST',
@@ -68,9 +68,5 @@ class App extends Component {
     );
   }
 }
-
-// const mapStateToProps = state => ({
-//   userToken: state.userToken
-// });
 
 export default connect()(App);
