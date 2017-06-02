@@ -62,8 +62,7 @@ render() {
         parsedChoice = parsedChoice.replace(/(&amp;)/g,"\&")
         parsedChoice = parsedChoice.replace(/(&shy;)/g,"\-")
         parsedChoice = parsedChoice.replace(/(Pok&eacute;)/g,"\Poke")
-        console.log(parsedChoice);
-        
+
 // sets the background color to green or red depending on correct or incorrect.
         let buttonColor = "";
           if(this.props.checkAnswerArray.length > 0) {
