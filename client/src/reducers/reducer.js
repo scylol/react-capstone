@@ -75,6 +75,7 @@ export default function reducer(state=initialState, action) {
 
     console.log(state.score);
     const category = state.questions[0].category;
+    state.scoreTotals = {...state.scoreTotals};
     if(!state.scoreTotals.hasOwnProperty(state.questions[0].category)) {
 
       state.scoreTotals[category] = [0,0];

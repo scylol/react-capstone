@@ -35,7 +35,7 @@ export const setUserData = (value) => ({
   value
 });
 
-export const fetchQuestions = (category) => dispatch => {
+export const fetchQuestions = (category) => (dispatch, getState) => {
   //console.log('called fetch questions');
   dispatch(fetchQuestionsRequest());
   //console.log(category);
