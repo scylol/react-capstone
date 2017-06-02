@@ -43,7 +43,6 @@ export class Quiz extends React.Component {
       question.question = question.question.replace(/(&ldquo;)/g,"\"")
       question.question = question.question.replace(/(&amp;)/g,"\&")
 
-
       let color = "";
       if(this.props.checkAnswerArray.length > 0) {
         if(this.props.checkAnswerArray[index] === 1) {
