@@ -42,6 +42,7 @@ export class Quiz extends React.Component {
       question.question = question.question.replace(/(&#039;)/g,"\'")
       question.question = question.question.replace(/(&ldquo;)/g,"\"")
       question.question = question.question.replace(/(&amp;)/g,"\&")
+      question.question = question.question.replace(/(&shy;)/g,"\-")
 
       let color = "";
       if(this.props.checkAnswerArray.length > 0) {
@@ -57,6 +58,7 @@ export class Quiz extends React.Component {
         choice = choice.replace(/(&#039;)/g,"\'")
         choice = choice.replace(/(&ldquo;)/g,"\"")
         choice = choice.replace(/(&amp;)/g,"\&")
+        choice = choice.replace(/(&shy;)/g,"\-")
         let buttonColor = "";
           if(this.props.checkAnswerArray.length > 0) {
             if(choice === this.props.scoreTracker[index]) {

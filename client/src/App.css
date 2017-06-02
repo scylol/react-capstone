@@ -9,7 +9,7 @@
   text-align: center;
   background: #F7FFF7;
   background-image: url('https://www.transparenttextures.com/patterns/blizzard.png');
-  font-family: 'Poiret One', cursive;
+  font-family: 'Comfortaa', cursive;
   font-weight: bolder;
 }
 
@@ -66,7 +66,7 @@
 button, pure-button{
   margin: 0.5em;
   box-shadow: inset 5px -10px 10px #CBD1CB,1px 1px 5px darkgrey;
-
+  /*text-shadow: 0px 0px 1px black;*/
 }
 
 ul{

@@ -1,5 +1,4 @@
 import React from "react";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Categories from "../config";
 import { fetchQuestions } from "../actions/action";
 import { connect } from "react-redux";
@@ -21,13 +20,6 @@ export class Header extends React.Component {
     const category = event.target.value;
     //console.log('category is ' + category);
     this.props.dispatch(fetchQuestions(category));
-    this.forceHideHistory();
-  }
-
-  forceHideHistory(){
-    this.setState({
-        showHistory: false
-    });
   }
 
   showHistory(){
