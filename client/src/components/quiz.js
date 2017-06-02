@@ -27,19 +27,21 @@ export class Quiz extends React.Component {
 //dispatches the submit Quiz action which compares the user's answers to the correct answers, then pushes them to the database.
   handleSubmit(event){
     this.props.dispatch(submitQuiz());
-    $('.score-container').removeAttr('hidden');
+    $('.score-container').show();
+    $('.submit-button').hide();
 };
 
 render() {
     let questions = this.props.questions.map((question, index) => {
 //parse out the annoying strings from the API
-      question.question = question.question.replace(/(&quot\;)/g,"\"")
-      question.question = question.question.replace(/(&rdquo\;)/g,"\"")
-      question.question = question.question.replace(/(&#039;)/g,"\'")
-      question.question = question.question.replace(/(&ldquo;)/g,"\"")
-      question.question = question.question.replace(/(&amp;)/g,"\&")
-      question.question = question.question.replace(/(&shy;)/g,"\-")
-      question.question = question.question.replace(/(Pok&eacute;)/g,"\Poke")
+      let parsedQuestion = question.question;
+      parsedQuestion = parsedQuestion.replace(/(&quot\;)/g,"\"")
+      parsedQuestion = parsedQuestion.replace(/(&rdquo\;)/g,"\"")
+      parsedQuestion = parsedQuestion.replace(/(&#039;)/g,"\'")
+      parsedQuestion = parsedQuestion.replace(/(&ldquo;)/g,"\"")
+      parsedQuestion = parsedQuestion.replace(/(&amp;)/g,"\&")
+      parsedQuestion = parsedQuestion.replace(/(&shy;)/g,"\-")
+      parsedQuestion = parsedQuestion.replace(/(Pok&eacute;)/g,"\Poke")
 // sets the background color to green or red depending on correct or incorrect.
       let color = "";
       if(this.props.checkAnswerArray.length > 0) {
@@ -52,13 +54,15 @@ render() {
       }
       const choices = this.props.questions[index].choices.map((choice, index2) => {
 //parse out the annoying strings from the API        
-        choice = choice.replace(/(&quot\;)/g,"\"")
-        choice = choice.replace(/(&rdquo\;)/g,"\"")
-        choice = choice.replace(/(&#039;)/g,"\'")
-        choice = choice.replace(/(&ldquo;)/g,"\"")
-        choice = choice.replace(/(&amp;)/g,"\&")
-        choice = choice.replace(/(&shy;)/g,"\-")
-        choice = choice.replace(/(Pok&eacute;)/g,"\Poke")
+        let parsedChoice = choice;
+        parsedChoice = parsedChoice.replace(/(&quot\;)/g,"\"")
+        parsedChoice =parsedChoice.replace(/(&rdquo\;)/g,"\"")
+        parsedChoice = parsedChoice.replace(/(&#039;)/g,"\'")
+        parsedChoice = parsedChoice.replace(/(&ldquo;)/g,"\"")
+        parsedChoice = parsedChoice.replace(/(&amp;)/g,"\&")
+        parsedChoice = parsedChoice.replace(/(&shy;)/g,"\-")
+        parsedChoice = parsedChoice.replace(/(Pok&eacute;)/g,"\Poke")
+        console.log(parsedChoice);
         
 // sets the background color to green or red depending on correct or incorrect.
         let buttonColor = "";
@@ -79,13 +83,13 @@ render() {
             key={index2}
             id={[index,index2]}
           >
-            {choice}
+            {parsedChoice}
           </button>
         );
       });
       return (
         <li id={`b${index}`} className={`question-box ${color}`} key={index}>
-        <h3>{question.question}</h3>
+        <h3>{parsedQuestion}</h3>
           {choices}
         </li>
       );
@@ -103,7 +107,7 @@ render() {
         <ul id="questionList">
           {questions}
           <li>
-            <div hidden className='score-container'><h2>Your Score:{this.props.score}0%</h2></div>
+            <div className='score-container'><h2>Your Score:{this.props.score}0%</h2></div>
           </li>
         </ul>
         {button}

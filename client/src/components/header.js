@@ -4,6 +4,8 @@ import { fetchQuestions } from "../actions/action";
 import { connect } from "react-redux";
 import UserHistory from './userHistory';
 
+import $ from 'jquery';
+
 import "./header.css";
 
 export class Header extends React.Component {
@@ -19,6 +21,8 @@ export class Header extends React.Component {
   getQuestions(event) {
     const category = event.target.value;
     this.props.dispatch(fetchQuestions(category));
+     $('.score-container').hide();
+     $('.submit-button').show();
   }
 
 //Toggles the User History
@@ -27,6 +31,8 @@ export class Header extends React.Component {
          showHistory: !this.state.showHistory
      });
   }
+
+  
 
 
   render() {
