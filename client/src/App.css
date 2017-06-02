@@ -8,6 +8,7 @@
 .App {
   text-align: center;
   background: #F7FFF7;
+  background-image: url('https://www.transparenttextures.com/patterns/blizzard.png');
   font-family: 'Poiret One', cursive;
   font-weight: bolder;
 }
@@ -16,6 +17,7 @@
   margin-top: 0;
   padding-top: 0;
   background: #FFE66D;
+  background-image: url('https://www.transparenttextures.com/patterns/otis-redding.png');
   border-bottom: 8px solid black;
 }
 .header h1{
@@ -35,7 +37,8 @@
   padding: 0.5em;
   border: 1px solid black;
   border-radius: 0.3em;
-  background: #7EfDE4;
+  /*#7EfDE4;*/
+  background: rgba(255,255,255,0);
   box-shadow: inset 1px -1px 3px #1A535C;
 }
 
@@ -47,7 +50,8 @@
 }
 
 .header button{
-  box-shadow: inset 5px -10px 10px #CBD1CB;
+  box-shadow: inset 5px -10px 10px #CBD1CB, 1px 1px 5px darkgrey;
+
 }
 
 .header .historyButton{
@@ -61,7 +65,8 @@
 
 button, pure-button{
   margin: 0.5em;
-  box-shadow: inset 5px -10px 10px #CBD1CB;
+  box-shadow: inset 5px -10px 10px #CBD1CB,1px 1px 5px darkgrey;
+
 }
 
 ul{
