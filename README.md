@@ -1,58 +1,22 @@
-# Thinkful Full Stack Template
+[![catlogo5](https://cloud.githubusercontent.com/assets/25944411/26743052/54b724d2-47ae-11e7-9e1e-b0e6268aadfe.png)](https://still-cliffs-73963.herokuapp.com/)
+## Why Quizical
+If you ever want to sit back and relax and see how smart you are, look no further. The reason why Quizical is a great place to show off your skills is because it records all of your quiz results. This is what makes Quizical such a fun place to be. You will know the areas you struggle in, as well as the areas you are dominant in. Our first priority is to be a place to go to have fun, but we will also allow users to grow their understanding of various topics by giving them their stats on quizzes they have previously taken. What are you waiting for? Go see how awesome you are!
 
-A template for developing and deploying full stack JavaScript apps.
+## What is Quizical
+Quizical is a very simple app that allows users to take quizzes on various topics. With the click of a button, the user will be given 10 questions on the topic of their choosing. The great thing about Quizical is how similar it is to a written quiz. You submit all your answers at once, not one at a time. The answer you select will light up green, but you are able to change your answer before you hit the submit button. After you hit submit, you will be given your score, as well as all of the correct answers. We want users not only to take quizzes, but be able to learn from questions they didn’t get correctly. The best feature of Quizical in my opinion is the User History. With the click of a button, the user can see how they perform on each category. It will show you your percentage, as well as the total amount of correctly answered questions. This is what will bring users back to Quizical. Everyone will want to improve their stats on every subject available. 
 
-## Getting started
+## ScreenShots
+[HomePage](https://gyazo.com/a7bea66f5b1e3c6c6534687900eed947)
 
-### Setting up a project
+[Quiz](https://gyazo.com/63d9860410364cb0de944a01be80e1b2)
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/full-stack-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+[After Submit](https://gyazo.com/d53d06d5d19d2d7486c5fed1f08e55a8)
 
-### Working on the project
+[User History](https://gyazo.com/b92f47e01a3635d9ebdfed8f9ca03b50)
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
+### Technology Used
+HTML, CSS, Javascript, SQL db, knex,  react, redux
 
-## Proxying
 
-In development, the full stack template works by proxying requests from port 8080 to the server or the client.  Any requests to routes which start with `/api/`, (for example, `/api/foo`, or `/api/foo/bar`) will be sent to the server.  All other requests, will serve the client.
 
-*tl;dr* Make sure your API endpoints start with `/api`.
-
-## Installing dependencies
-
-Client-side dependencies should be installed into the `client` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/client
-npm install --save dependency-name
-```
-
-Server-side dependencies should be installed into the `server` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/server
-npm install --save dependency-name
-```
-
-## Deployment
-
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
 
