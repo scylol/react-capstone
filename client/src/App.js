@@ -10,13 +10,12 @@ import Header from './components/header.js';
 
 import { setUserData } from "./actions/action";
 
-import $ from 'jquery';
+
 
 class App extends Component {
 
 //makes a get request to the database if the cookie exists to set the User Data History in the state.
   componentDidMount(){
-    $('.score-container').hide();
     let cookieIdexists = false;
     let cookieId = document.cookie.split(';').map((val) => {
       return val.split('=');

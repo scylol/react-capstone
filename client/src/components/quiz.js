@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectAnswer, submitQuiz } from "../actions/action";
-import $ from 'jquery';
+import { selectAnswer, submitQuiz, updateUserScore } from "../actions/action";
+
 import './quiz.css';
 import { _ } from "underscore";
 
@@ -16,20 +16,13 @@ export class Quiz extends React.Component {
     const values = event.target.id.split(',')
     const index = values[0];
     const value = event.target.value;
-
     this.props.dispatch(selectAnswer(index, value));
-
-    $(event.target).siblings('button').removeClass('green');
-    $(event.target).siblings('button').removeClass('pure-button-active');
-    $(event.target).addClass('green');
-    $(event.target).addClass('pure-button-active');
-  }
+}
 //dispatches the submit Quiz action which compares the user's answers to the correct answers, then pushes them to the database.
   handleSubmit(event){
     this.props.dispatch(submitQuiz());
-    $('.score-container').show();
-    $('.submit-button').hide();
-};
+    this.props.dispatch(updateUserScore())
+  };
 
 render() {
     let questions = this.props.questions.map((question, index) => {
@@ -73,7 +66,11 @@ render() {
               buttonColor = 'green';
             }
           }
+          else if(choice === this.props.scoreTracker[index]) {
+            buttonColor = 'green';
+          }
 
+        
         return (
           <button
             className={`choice-button pure-button ${buttonColor}`}
@@ -93,20 +90,27 @@ render() {
         </li>
       );
     });
-    let button = "";
-    if(questions.length > 0){
+    let button;
+    if(questions.length > 0 && this.props.submittedQuiz === false){
       button = <button className='submit-button pure-button' onClick={this.handleSubmit}>Submit</button>;
     }
     if(!questions.length > 0){
       questions = <h2>Please pick a quiz!</h2>
     }
+    let scoreTable;          
+        if(this.props.showScore === true) {
+          scoreTable = `Your Score:${this.props.score}0%`;
+        }
+        else {
+          scoreTable = '';
+        }
     return (
       <div>
 
         <ul id="questionList">
           {questions}
           <li>
-            <div className='score-container'><h2>Your Score:{this.props.score}0%</h2></div>
+            <div className='score-container'><h2>{scoreTable}</h2></div>
           </li>
         </ul>
         {button}
@@ -122,7 +126,9 @@ const mapStateToProps = state => ({
   scoreTracker: state.scoreTracker,
   questions: state.questions,
   score: state.score,
-  checkAnswerArray: state.checkAnswerArray
+  checkAnswerArray: state.checkAnswerArray,
+  submittedQuiz: state.submittedQuiz,
+  showScore: state.showScore
 });
 
 export default connect(mapStateToProps)(Quiz);

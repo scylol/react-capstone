@@ -11,7 +11,9 @@ const initialState = {
   scoreTracker: [],
   scoreKeys: [],
   checkAnswerArray: [],
-  score: 0
+  score: 0,
+  submittedQuiz: false,
+  showScore: false
 };
 
 export default function reducer(state=initialState, action) {
@@ -43,7 +45,10 @@ export default function reducer(state=initialState, action) {
       loading: false,
       error: null,
       scoreKeys: answerArray,
-      checkAnswerArray: []
+      checkAnswerArray: [],
+      submittedQuiz: false,
+      score: 0,
+      showScore: false
     });
   }
   else if(action.type === SELECT_ANSWER){
@@ -80,18 +85,9 @@ export default function reducer(state=initialState, action) {
 //Add the score to the numerator, add 10 to denominator
     state.scoreTotals[category][0] += state.score;
     state.scoreTotals[category][1] += 10;
-//Updates the Users score inside the database
-    fetch(`/api/users/${state.userToken.toString()}`,{
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({'scores': state.scoreTotals})
-    }).then(res=>res.json())
-    .catch(err => {
-      console.log(err);
-    });
+    state.submittedQuiz = true;
+    state.showScore = true;
+
   }
   else if(action.type === SET_USER_DATA) {
 //sets the State based on the User's Cookie.
@@ -100,6 +96,7 @@ export default function reducer(state=initialState, action) {
       scoreTotals: action.value.scores
     });
   }
+  
 
   return state;
 }

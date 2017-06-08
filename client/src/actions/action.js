@@ -48,4 +48,21 @@ export const fetchQuestions = (category) => (dispatch) => {
   });
 };
 
+export const updateUserScore = () => (dispatch, getState) => {
+  //Updates the Users score inside the database
+  const state = getState();
+  fetch(`/api/users/${state.userToken.toString()}`,{
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({'scores': state.scoreTotals})
+  }).then(res=>res.json())
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+
 
