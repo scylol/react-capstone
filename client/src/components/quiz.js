@@ -23,18 +23,31 @@ export class Quiz extends React.Component {
     this.props.dispatch(submitQuiz());
     this.props.dispatch(updateUserScore())
   };
+//parse out the annoying strings from the API
+  parseText(text) {
+     return text.replace(/(&eacute;)/g,"\e").replace(/(&quot\;)/g,"\"")
+      .replace(/(&rdquo\;)/g,"\"")
+      .replace(/(&#039;)/g,"\'")
+      .replace(/(&ldquo;)/g,"\"")
+      .replace(/(&amp;)/g,"\&")
+      .replace(/(&shy;)/g,"\-")
+      .replace(/(&rsquo;)/g,"\'")
+      .replace(/(&ecirc;)/g,"\e")
+      .replace(/(&ocirc;)/g,"\o")
+      .replace(/(&ouml;)/g,"\o")
+      .replace(/(&Ouml;)/g,"\O")
+      .replace(/(&lt;)/g,"\<")
+      .replace(/(&oacute;)/g,"\o")
+      .replace(/(&auml;)/g,"\a")
+      .replace(/(&uuml;)/g,"\U")
+      .replace(/(&scaron;)/g,"\s")
+}
 
 render() {
     let questions = this.props.questions.map((question, index) => {
-//parse out the annoying strings from the API
-      let parsedQuestion = question.question;
-      parsedQuestion = parsedQuestion.replace(/(&quot\;)/g,"\"")
-      parsedQuestion = parsedQuestion.replace(/(&rdquo\;)/g,"\"")
-      parsedQuestion = parsedQuestion.replace(/(&#039;)/g,"\'")
-      parsedQuestion = parsedQuestion.replace(/(&ldquo;)/g,"\"")
-      parsedQuestion = parsedQuestion.replace(/(&amp;)/g,"\&")
-      parsedQuestion = parsedQuestion.replace(/(&shy;)/g,"\-")
-      parsedQuestion = parsedQuestion.replace(/(Pok&eacute;)/g,"\Poke")
+    let parsedQuestion = question.question;
+
+    parsedQuestion = this.parseText(parsedQuestion);
 // sets the background color to green or red depending on correct or incorrect.
       let color = "";
       if(this.props.checkAnswerArray.length > 0) {
@@ -45,16 +58,10 @@ render() {
           color = 'light-red';
         }
       }
-      const choices = this.props.questions[index].choices.map((choice, index2) => {
-//parse out the annoying strings from the API        
-        let parsedChoice = choice;
-        parsedChoice = parsedChoice.replace(/(&quot\;)/g,"\"")
-        parsedChoice =parsedChoice.replace(/(&rdquo\;)/g,"\"")
-        parsedChoice = parsedChoice.replace(/(&#039;)/g,"\'")
-        parsedChoice = parsedChoice.replace(/(&ldquo;)/g,"\"")
-        parsedChoice = parsedChoice.replace(/(&amp;)/g,"\&")
-        parsedChoice = parsedChoice.replace(/(&shy;)/g,"\-")
-        parsedChoice = parsedChoice.replace(/(Pok&eacute;)/g,"\Poke")
+      let choices = this.props.questions[index].choices.map((choice, index2) => {
+      let parsedChoice = choice;
+
+      parsedChoice = this.parseText(parsedChoice);
 
 // sets the background color to green or red depending on correct or incorrect.
         let buttonColor = "";

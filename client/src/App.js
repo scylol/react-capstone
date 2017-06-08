@@ -31,7 +31,6 @@ class App extends Component {
         })
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.props.dispatch(setUserData(res));
         })
       }
@@ -49,11 +48,9 @@ class App extends Component {
         'Accept': 'application/json'
         }
       }).then(res => {
-        console.log(res);
-        return res.json();
+         return res.json();
       }).then(result => {
-        console.log(result[0].id);
-        document.cookie = `id=${result[0].id}; expires= ${expiry}`;
+         document.cookie = `id=${result[0].id}; expires= ${expiry}`;
         this.props.dispatch(setUserData(result[0]));
         return result;
       })

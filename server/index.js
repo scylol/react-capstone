@@ -27,7 +27,6 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 app.get('/api/users/:id',(req,res)=>{
   let {id} = req.params;
   knex.select().from('users').where('id', id).then(result => {
-    console.log(result);
     res.json(result[0]).end();
   });
 });
@@ -45,7 +44,6 @@ app.put('/api/users/:id',(req,res)=>{
 app.post('/api/users',(req,res)=>{
   knex('users').insert({name: req.body.name}).into('users').returning(['name', 'id', 'scores'])
   .then(e=>{
-    console.log('done!');
     res.send(e);
   });
 });
