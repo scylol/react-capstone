@@ -53,7 +53,7 @@ export class Quiz extends React.Component {
       let parsedQuestion = question.question;
       parsedQuestion = this.parseText(parsedQuestion);
       // sets the background color to green or red depending on correct or incorrect.
-      let color = "";
+      let color;
       if (this.props.checkAnswerArray.length > 0) {
         if (this.props.checkAnswerArray[index] === 1) {
           color = "light-green";
@@ -66,7 +66,7 @@ export class Quiz extends React.Component {
         let parsedChoice = choice;
         parsedChoice = this.parseText(parsedChoice);
         // sets the background color to green or red depending on correct or incorrect.
-        let buttonColor = "";
+        let buttonColor;
         if (this.props.checkAnswerArray.length > 0) {
           if (choice === this.props.scoreTracker[index]) {
             buttonColor = "red";

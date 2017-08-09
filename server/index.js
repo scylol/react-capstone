@@ -1,17 +1,20 @@
 const path = require('path');
 const express = require('express');
-
 const bodyParser = require('body-parser');
+
+require('dotenv').config();
 
 
 let knex = require('knex')({
   client: 'pg',
-  connection: 'postgres://ryutqlmo:veCNdcwIHiGuFX9XjqdeebVGBkjV3UHb@stampy.db.elephantsql.com:5432/ryutqlmo'
+  connection: process.env.DATABASE_URL
 });
 
 const app = express();
 
 app.use(bodyParser.json());
+
+
 
 
 // Serve the built client

@@ -58,10 +58,12 @@ export const updateUserScore = () => (dispatch, getState) => {
       'Accept': 'application/json'
     },
     body: JSON.stringify({'scores': state.scoreTotals})
-  }).then(res=>res.json())
-    .catch(err => {
-      console.log(err);
-    });
+  }).then(res=> {
+    console.log('res', res);
+    return res.json();
+  }).catch(err => {
+    console.log(err);
+  });
 };
 
 
